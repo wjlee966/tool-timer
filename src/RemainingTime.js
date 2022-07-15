@@ -36,8 +36,7 @@ const RemainingTime = ({ fins, setFins, minute, second, isActive }) => {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fins, isActive]);
+  }, [fins, isActive, setFins]);
 
   return fins.map((deg, index) => <Fin key={index} deg={deg} />);
 };
