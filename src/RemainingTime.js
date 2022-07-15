@@ -36,7 +36,7 @@ const RemainingTime = ({ fins, setFins, minute, second, isActive }) => {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [fins, isActive, setFins]);
+  }, [fins, isActive]);
 
   return fins.map((deg, index) => <Fin key={index} deg={deg} />);
 };
