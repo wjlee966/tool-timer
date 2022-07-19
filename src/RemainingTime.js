@@ -9,7 +9,17 @@ const Fin = ({ deg }) => {
   );
 };
 
-const RemainingTime = ({ fins, setFins, minute, second, isActive }) => {
+const RemainingTime = ({
+  fins,
+  setFins,
+  minute,
+  second,
+  isActive,
+  setIsActive,
+  alarmActive,
+  setAlarmActive,
+  audioRef,
+}) => {
   useEffect(() => {
     setFins(
       minute
@@ -31,12 +41,36 @@ const RemainingTime = ({ fins, setFins, minute, second, isActive }) => {
             return i < fins.length - 1;
           })
         );
-      }, 1000);
+        if (!fins.length) {
+          console.log('fins is null');
+          setIsActive(false);
+          setAlarmActive(true);
+        }
+      }, 100);
     } else {
+      console.log('clear interval');
       clearInterval(interval);
     }
     return () => clearInterval(interval);
   }, [fins, isActive]);
+
+  useEffect(() => {
+    if (alarmActive) {
+      audioRef.current.play();
+      console.log(`duration = ${audioRef.current.duration}`);
+      console.log(`alarmActive = ${alarmActive}`);
+    } else {
+      console.log(`alarmActive = ${alarmActive}`);
+      audioRef.current.pause();
+    }
+  }, [alarmActive]);
+
+  useEffect(() => {
+    audioRef.current.addEventListener('ended', () => setAlarmActive(false));
+    return () => {
+      audioRef.current.addEventListener('ended', () => setAlarmActive(false));
+    };
+  }, []);
 
   return fins.map((deg, index) => <Fin key={index} deg={deg} />);
 };
