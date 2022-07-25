@@ -20,6 +20,8 @@ function App() {
 
   const audioRef = useRef(new Audio(audioSrc));
 
+  const [reset, setReset] = useState(false);
+
   return (
     <div className='container'>
       <div className='timer-container'>
@@ -41,6 +43,8 @@ function App() {
               alarmActive={alarmActive}
               setAlarmActive={setAlarmActive}
               audioRef={audioRef}
+              reset={reset}
+              setReset={setReset}
             />
           </div>
         </div>
@@ -55,6 +59,9 @@ function App() {
             <i className='fa fa-play' />
           </button>
         )}
+        <button className='start' onClick={() => setReset(prev => !prev)}>
+          <i className='fa fa-repeat' />
+        </button>
       </div>
     </div>
   );

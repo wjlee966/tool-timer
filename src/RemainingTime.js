@@ -19,6 +19,8 @@ const RemainingTime = ({
   alarmActive,
   setAlarmActive,
   audioRef,
+  reset,
+  setReset,
 }) => {
   useEffect(() => {
     setFins(
@@ -28,7 +30,7 @@ const RemainingTime = ({
         })
         .reduce((acc, cur) => [...acc, ...cur])
     );
-  }, []);
+  }, [reset]);
 
   useEffect(() => {
     let interval = null;
@@ -42,13 +44,13 @@ const RemainingTime = ({
           })
         );
         if (!fins.length) {
-          console.log('fins is null');
+          console.log(`fins.length=${fins.length}`);
           setIsActive(false);
           setAlarmActive(true);
         }
-      }, 100);
+      }, 1000);
     } else {
-      console.log('clear interval');
+      // console.log('clear fins interval');
       clearInterval(interval);
     }
     return () => clearInterval(interval);
@@ -60,16 +62,14 @@ const RemainingTime = ({
       console.log(`duration = ${audioRef.current.duration}`);
       console.log(`alarmActive = ${alarmActive}`);
     } else {
-      console.log(`alarmActive = ${alarmActive}`);
-      audioRef.current.pause();
+      // audioRef.current.pause();
+      // console.log(`alarmActive = ${alarmActive}`);
     }
   }, [alarmActive]);
 
   useEffect(() => {
     audioRef.current.addEventListener('ended', () => setAlarmActive(false));
-    return () => {
-      audioRef.current.addEventListener('ended', () => setAlarmActive(false));
-    };
+    return () => audioRef.current.addEventListener('ended', () => setAlarmActive(false));
   }, []);
 
   return fins.map((deg, index) => <Fin key={index} deg={deg} />);
