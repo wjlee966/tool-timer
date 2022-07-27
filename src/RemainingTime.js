@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './RemainingTime.css';
+import useInterval from './useInterval';
 
 const Fin = ({ deg }) => {
   return (
@@ -23,6 +24,22 @@ const RemainingTime = ({
   setReset,
 }) => {
   useEffect(() => {
+    if (isActive) {
+      console.log('Timer Start');
+      // console.log('RederingStart Start');
+      // console.log('RederingEnd Start');
+      console.time('Timer');
+      // console.time('RederingStart');
+      // console.time('RederingEnd');
+    } else {
+      console.log('Timer End (isActive)');
+      console.timeEnd('Timer');
+      // console.timeEnd('RederingStart');
+      // console.timeEnd('RederingEnd');
+    }
+  }, [isActive]);
+
+  useEffect(() => {
     setFins(
       minute
         .map((_, m) => {
@@ -32,29 +49,28 @@ const RemainingTime = ({
     );
   }, [reset]);
 
-  useEffect(() => {
-    let interval = null;
-
-    if (isActive && fins !== null) {
-      interval = setInterval(() => {
+  useInterval(
+    () => {
+      if (isActive && fins !== null) {
+        // console.timeLog('RederingStart');
         setFins(
           fins.filter((_, i) => {
-            // console.log(`i:::${i} ...fins.length:::${fins.length}`);
+            // console.log(`i:::${i} ...fins:::${fins} ...fins.length:::${fins.length}`);
             return i < fins.length - 1;
           })
         );
+        // console.timeLog('RederingEnd');
+        console.timeLog('Timer');
+        console.log(fins.length);
         if (!fins.length) {
           console.log(`fins.length=${fins.length}`);
           setIsActive(false);
           setAlarmActive(true);
         }
-      }, 1000);
-    } else {
-      // console.log('clear fins interval');
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [fins, isActive]);
+      }
+    },
+    isActive ? 1000 : null
+  );
 
   useEffect(() => {
     if (alarmActive) {
