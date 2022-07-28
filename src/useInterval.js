@@ -10,10 +10,28 @@ const useInterval = (callback, delay) => {
 
   // Set up the interval
   useEffect(() => {
+    let counter = 1;
+    let timeoutId;
+    const startTime = Date.now();
+
     const tick = () => savedCallback.current();
+
+    function main() {
+      const nowTime = Date.now();
+      const nextTime = startTime + counter * delay;
+      const correctedDelay = delay - (nowTime - nextTime);
+      timeoutId = setTimeout(main, correctedDelay);
+
+      console.log(`deviation: ${nowTime - nextTime}`);
+      console.log(`correctedDelay: ${correctedDelay}`);
+
+      counter += 1;
+      tick();
+    }
+
     if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
+      timeoutId = setTimeout(main, delay);
+      return () => clearInterval(timeoutId);
     }
   }, [delay]);
 };
