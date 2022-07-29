@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const useInterval = (callback, delay) => {
+const useInterval = (callback, renderingDeviation, delay) => {
   const savedCallback = useRef();
 
   // Remember the latest callback
@@ -19,10 +19,11 @@ const useInterval = (callback, delay) => {
     function main() {
       const nowTime = Date.now();
       const nextTime = startTime + counter * delay;
-      const correctedDelay = delay - (nowTime - nextTime);
+      const correctedDelay = delay - (nowTime - nextTime) - renderingDeviation.current;
       timeoutId = setTimeout(main, correctedDelay);
 
       console.log(`deviation: ${nowTime - nextTime}`);
+      console.log(`renderingDeviation: ${renderingDeviation.current}`);
       console.log(`correctedDelay: ${correctedDelay}`);
 
       counter += 1;

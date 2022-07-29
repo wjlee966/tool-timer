@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './RemainingTime.css';
 import useInterval from './useInterval';
 
@@ -23,19 +23,21 @@ const RemainingTime = ({
   reset,
   setReset,
 }) => {
+  const renderingDeviation = useRef(0);
+
   useEffect(() => {
     if (isActive) {
       console.log('Timer Start');
-      // console.log('RederingStart Start');
-      // console.log('RederingEnd Start');
+      console.log('RederingStart Start');
+      console.log('RederingEnd Start');
       console.time('Timer');
-      // console.time('RederingStart');
-      // console.time('RederingEnd');
+      console.time('RederingStart');
+      console.time('RederingEnd');
     } else {
       console.log('Timer End (isActive)');
       console.timeEnd('Timer');
-      // console.timeEnd('RederingStart');
-      // console.timeEnd('RederingEnd');
+      console.timeEnd('RederingStart');
+      console.timeEnd('RederingEnd');
     }
   }, [isActive]);
 
@@ -52,14 +54,21 @@ const RemainingTime = ({
   useInterval(
     () => {
       if (isActive && fins !== null) {
-        // console.timeLog('RederingStart');
+        console.timeLog('RederingStart');
+        const renderingStartTime = Date.now();
+
         setFins(
           fins.filter((_, i) => {
             // console.log(`i:::${i} ...fins:::${fins} ...fins.length:::${fins.length}`);
             return i < fins.length - 1;
           })
         );
-        // console.timeLog('RederingEnd');
+        console.timeLog('RederingEnd');
+        const renderingEndTime = Date.now();
+        console.log(`Redering Deviation Time: ${renderingEndTime - renderingStartTime}`);
+        renderingDeviation.current = renderingEndTime - renderingStartTime;
+        console.log(`renderingDeviation.current: ${renderingDeviation.current}`);
+
         console.timeLog('Timer');
         console.log(fins.length);
         if (!fins.length) {
@@ -69,6 +78,7 @@ const RemainingTime = ({
         }
       }
     },
+    renderingDeviation,
     isActive ? 1000 : null
   );
 
