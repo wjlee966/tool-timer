@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './RemainingTime.css';
-import useInterval from './useInterval';
+import React, { useEffect, useRef } from 'react';
+import './RemainingTimeView.css';
+import useInterval from '../useInterval';
 
 const Fin = ({ deg }) => {
   return (
@@ -10,18 +10,15 @@ const Fin = ({ deg }) => {
   );
 };
 
-const RemainingTime = ({
+const RemainingTimeView = ({
   fins,
   setFins,
   minute,
   second,
   isActive,
   setIsActive,
-  alarmActive,
-  setAlarmActive,
-  audioRef,
+  isFast,
   reset,
-  setReset,
 }) => {
   const renderingDeviation = useRef(0);
 
@@ -34,7 +31,7 @@ const RemainingTime = ({
       console.time('RederingStart');
       console.time('RederingEnd');
     } else {
-      console.log('Timer End (isActive)');
+      console.log('Timer End (Pause Timer)');
       console.timeEnd('Timer');
       console.timeEnd('RederingStart');
       console.timeEnd('RederingEnd');
@@ -65,40 +62,22 @@ const RemainingTime = ({
         );
         console.timeLog('RederingEnd');
         const renderingEndTime = Date.now();
-        console.log(`Redering Deviation Time: ${renderingEndTime - renderingStartTime}`);
         renderingDeviation.current = renderingEndTime - renderingStartTime;
-        console.log(`renderingDeviation.current: ${renderingDeviation.current}`);
+        console.log(`Redering Deviation Time: ${renderingDeviation.current}`);
 
         console.timeLog('Timer');
         console.log(fins.length);
         if (!fins.length) {
           console.log(`fins.length=${fins.length}`);
           setIsActive(false);
-          setAlarmActive(true);
         }
       }
     },
-    renderingDeviation,
-    isActive ? 1000 : null
+    renderingDeviation.current,
+    isActive ? (isFast ? 1 : 1000) : null
   );
-
-  useEffect(() => {
-    if (alarmActive) {
-      audioRef.current.play();
-      console.log(`duration = ${audioRef.current.duration}`);
-      console.log(`alarmActive = ${alarmActive}`);
-    } else {
-      // audioRef.current.pause();
-      // console.log(`alarmActive = ${alarmActive}`);
-    }
-  }, [alarmActive]);
-
-  useEffect(() => {
-    audioRef.current.addEventListener('ended', () => setAlarmActive(false));
-    return () => audioRef.current.addEventListener('ended', () => setAlarmActive(false));
-  }, []);
 
   return fins.map((deg, index) => <Fin key={index} deg={deg} />);
 };
 
-export default RemainingTime;
+export default RemainingTimeView;

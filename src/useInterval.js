@@ -19,11 +19,11 @@ const useInterval = (callback, renderingDeviation, delay) => {
     function main() {
       const nowTime = Date.now();
       const nextTime = startTime + counter * delay;
-      const correctedDelay = delay - (nowTime - nextTime) - renderingDeviation.current;
+      const correctedDelay = delay - (nowTime - nextTime) - renderingDeviation;
       timeoutId = setTimeout(main, correctedDelay);
 
       console.log(`deviation: ${nowTime - nextTime}`);
-      console.log(`renderingDeviation: ${renderingDeviation.current}`);
+      console.log(`renderingDeviation: ${renderingDeviation}`);
       console.log(`correctedDelay: ${correctedDelay}`);
 
       counter += 1;

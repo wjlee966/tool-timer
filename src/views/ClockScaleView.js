@@ -1,7 +1,7 @@
 import React from 'react';
-import './ClockScale.css';
+import './ClockScaleView.css';
 
-const ClockScale = () => {
+const ClockScaleView = () => {
   const scale = Array.from({ length: 30 }, (_, i) => i + 1);
 
   return scale.map((_, i) => {
@@ -17,4 +17,4 @@ const ClockScale = () => {
   });
 };
 
-export default ClockScale;
+export default ClockScaleView;

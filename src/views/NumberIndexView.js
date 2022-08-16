@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import './NumberIndex.css';
+import './NumberIndexView.css';
 
-const NumberIndex = () => {
+const NumberIndexView = () => {
   const index = Array.from({ length: 6 }, (_, i) => i + 1);
 
   const left = useRef(15);
@@ -21,4 +21,4 @@ const NumberIndex = () => {
   });
 };
 
-export default NumberIndex;
+export default NumberIndexView;

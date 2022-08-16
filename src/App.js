@@ -1,70 +1,99 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import ClockScale from './ClockScale';
-import NumberIndex from './NumberIndex';
-import RemainingTime from './RemainingTime';
-import effects from './effects';
-import { useRef } from 'react';
+import ButtonContainer from './containers/ButtonContainer';
+import ClockScaleContainer from './containers/ClockScaleContainer';
+import NumberIndexContainer from './containers/NumberIndexContainer';
+import RemainingTimeContainer from './containers/RemainingTimeContainer';
+import alarm from './effects';
 
-function App() {
-  const [endTime, setEndTime] = useState(25);
-  const [isActive, setIsActive] = useState(false);
-  const [fins, setFins] = useState([]);
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-  const minute = Array.from({ length: endTime }, (_, i) => i);
-  const second = Array.from({ length: 60 }, (_, i) => i);
+    this.state = {
+      endTime: 25,
+      fins: [],
+      isActive: false,
+      isFast: false,
+      reset: false,
+    };
+  }
 
-  const { audioSrc } = effects;
+  setEndTime = minute => {
+    this.setState(state => ({
+      endTime: minute,
+    }));
+  };
 
-  const [alarmActive, setAlarmActive] = useState(false);
+  setFins = fins => {
+    this.setState(state => ({
+      fins,
+    }));
+  };
 
-  const audioRef = useRef(new Audio(audioSrc));
+  setIsActive = isActive => {
+    this.setState(state => ({
+      isActive,
+    }));
+  };
 
-  const [reset, setReset] = useState(false);
+  setIsFast = isFast => {
+    this.setState(state => ({
+      isFast,
+    }));
+  };
 
-  return (
-    <div className='container'>
-      <div className='timer-container'>
-        <div className='timer'>
-          <div className='box-area'>
-            <div className='cover1' />
-            <div className='cover2' />
-            <ClockScale />
-            <NumberIndex />
-          </div>
-          <div className='scale-area'>
-            <RemainingTime
-              fins={fins}
-              setFins={setFins}
-              minute={minute}
-              second={second}
-              isActive={isActive}
-              setIsActive={setIsActive}
-              alarmActive={alarmActive}
-              setAlarmActive={setAlarmActive}
-              audioRef={audioRef}
-              reset={reset}
-              setReset={setReset}
-            />
+  setReset = reset => {
+    this.setState(state => ({
+      reset,
+    }));
+  };
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    const minute = Array.from({ length: this.state.endTime }, (_, i) => i);
+    const second = Array.from({ length: 60 }, (_, i) => i);
+
+    return (
+      <div className='container'>
+        <div className='timer-container'>
+          <div className='timer'>
+            <div className='box-area'>
+              <div className='cover1' />
+              <div className='cover2' />
+              <ClockScaleContainer />
+              <NumberIndexContainer />
+            </div>
+            <div className='scale-area'>
+              <RemainingTimeContainer
+                fins={this.state.fins}
+                setFins={this.setFins}
+                minute={minute}
+                second={second}
+                isActive={this.state.isActive}
+                setIsActive={this.setIsActive}
+                isFast={this.state.isFast}
+                reset={this.state.reset}
+              />
+            </div>
           </div>
         </div>
+        <div className='btn-container'>
+          <ButtonContainer
+            isActive={this.state.isActive}
+            setIsActive={this.setIsActive}
+            setIsFast={this.setIsFast}
+            setReset={this.setReset}
+          />
+        </div>
       </div>
-      <div className='btn-container'>
-        {isActive ? (
-          <button className='start' onClick={() => setIsActive(false)}>
-            <i className='fa fa-pause' />
-          </button>
-        ) : (
-          <button className='start' onClick={() => setIsActive(true)}>
-            <i className='fa fa-play' />
-          </button>
-        )}
-        <button className='start' onClick={() => setReset(prev => !prev)}>
-          <i className='fa fa-repeat' />
-        </button>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
