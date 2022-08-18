@@ -1,13 +1,17 @@
 ## 링크주소
   - [netlify](https://spontaneous-sherbet-c8c45e.netlify.app/)
+## 개발언어 및 기술
+  - 프론트 : HTML, CSS, React, MobX
+  - 백엔드 : Spring (REST API 기반, JWT 인증)
+  - IDE : VSCode, 버전관리 : Git, 프로덕션 배포 : AWS 의 Elastic Beanstalk
 ## 현재까지 구현된 기능
   - 시작, 잠시멈춤, 리셋, 테스트 (X1000 속도로 시작)
 ## 프론트 추가할 내용
   - MobX 적용
     - [참조 : React - eject 없이 Mobx 데코레이터 사용하기](https://velog.io/@wlsdud2194/Mobx-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-yarn-eject-%EC%97%86%EC%9D%B4-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
     - [참조 : Mobx를 적용하여 상태 관리하기 (2)](https://dlsgh120.tistory.com/50)
-  - 기능 : 시간 조절 기능
-    - 눈금을 드래그앤 드롭하면서 자유롭게 시간 조절
+  - 기능 : 시간 설정 기능
+    - 눈금을 드래그앤 드롭하면서 자유롭게 시간 설정
       - [참조 : Creating an app using Drag and Drop with React without libraries 👆!](https://dev.to/franklin030601/creating-an-app-using-drag-and-drop-with-react-without-libraries--5cg9)
   - 기능 : Noti 기능
     - 설정된 알람 시간 종료 후, Noti 와 함께 알림음 재생
@@ -27,5 +31,6 @@
   - 인증 기능 구현
     - JWT 기반 인증 (스프링 시큐리티)
 ## 프로덕션 배포
-  - AWS 의 일라스틱 빈스톡을 이용한 프론트/백엔드 배포
+  - AWS 의 Elastic Beanstalk 을 이용한 프론트/백엔드 배포
+    - [참조 : AWS Elastic Beanstalk 란 무엇입니까?](https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/Welcome.html) 
     
