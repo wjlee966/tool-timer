@@ -1,9 +1,9 @@
-## 링크주소
+## 링크주소 (임시배포)
   - [netlify](https://spontaneous-sherbet-c8c45e.netlify.app/)
 ## 개발언어 및 기술
   - 프론트 : HTML, CSS, React, MobX
-  - 백엔드 : Spring (REST API 기반, JWT 인증)
-  - IDE : VSCode, 버전관리 : Git, 프로덕션 배포 : AWS 의 Elastic Beanstalk
+  - 백엔드 : Spring (REST API 기반, JWT 인증) (예정)
+  - IDE : VSCode, 버전관리 : Git, 프로덕션 배포 : AWS 의 Elastic Beanstalk (예정)
 ## 현재까지 구현된 기능
   - 시작, 잠시멈춤, 리셋, 테스트 (X1000 속도로 시작)
 ## 프론트 추가할 내용
