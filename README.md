@@ -7,10 +7,8 @@
 ## 현재까지 구현된 기능
   - 시작, 잠시멈춤, 리셋, 테스트 (X1000 속도로 시작)
 ## 프론트 추가할 내용
-  - MobX 적용
-    - [참조 : React - eject 없이 Mobx 데코레이터 사용하기](https://velog.io/@wlsdud2194/Mobx-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-yarn-eject-%EC%97%86%EC%9D%B4-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
-    - [참조 : Mobx를 적용하여 상태 관리하기 (2)](https://dlsgh120.tistory.com/50)
-    - [참조 : Mobx6 이상에서 데코레이터 사용하기](https://ko.mobx.js.org/enabling-decorators.html)
+  - 👉 MobX 적용 중
+    - MobX 와 데코레이터 관련 환경설정 후, 버튼 관련 변수부터 MobX 에서 관리 전환 중
   - 기능 : 시간 설정 기능
     - 눈금을 드래그앤 드롭하면서 자유롭게 시간 설정
       - [참조 : Creating an app using Drag and Drop with React without libraries 👆!](https://dev.to/franklin030601/creating-an-app-using-drag-and-drop-with-react-without-libraries--5cg9)
