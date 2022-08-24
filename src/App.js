@@ -13,9 +13,6 @@ class App extends Component {
     this.state = {
       endTime: 25,
       fins: [],
-      isActive: false,
-      isFast: false,
-      reset: false,
     };
   }
 
@@ -30,30 +27,6 @@ class App extends Component {
       fins,
     }));
   };
-
-  setIsActive = isActive => {
-    this.setState(state => ({
-      isActive,
-    }));
-  };
-
-  setIsFast = isFast => {
-    this.setState(state => ({
-      isFast,
-    }));
-  };
-
-  setReset = reset => {
-    this.setState(state => ({
-      reset,
-    }));
-  };
-
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
-  componentWillUnmount() {}
 
   render() {
     const minute = Array.from({ length: this.state.endTime }, (_, i) => i);
@@ -75,21 +48,12 @@ class App extends Component {
                 setFins={this.setFins}
                 minute={minute}
                 second={second}
-                isActive={this.state.isActive}
-                setIsActive={this.setIsActive}
-                isFast={this.state.isFast}
-                reset={this.state.reset}
               />
             </div>
           </div>
         </div>
         <div className='btn-container'>
-          <ButtonContainer
-            isActive={this.state.isActive}
-            setIsActive={this.setIsActive}
-            setIsFast={this.setIsFast}
-            setReset={this.setReset}
-          />
+          <ButtonContainer />
         </div>
       </div>
     );

@@ -1,7 +1,8 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 import './ButtonView.css';
 
-const ButtonView = ({ isActive, setIsActive, setIsFast, setReset }) => {
+const ButtonView = observer(({ isActive, setIsActive, setIsFast, setReset }) => {
   return (
     <>
       {isActive ? (
@@ -40,6 +41,6 @@ const ButtonView = ({ isActive, setIsActive, setIsFast, setReset }) => {
       </button>
     </>
   );
-};
+});
 
 export default ButtonView;
