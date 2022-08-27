@@ -7,8 +7,8 @@
 ## 현재까지 구현된 기능
   - 시작, 잠시멈춤, 리셋, 테스트 (X1000 속도로 시작)
 ## 프론트 추가할 내용
-  - 👉 MobX 적용 중
-    - MobX 와 데코레이터 관련 환경설정 후, 버튼 관련 변수부터 MobX 에서 관리 전환 중
+  - MobX 적용 중 (잠시 멈춤)
+    - fins 제외하고 FinStore 에 등록
   - 기능 : 시간 설정 기능
     - 눈금을 드래그앤 드롭하면서 자유롭게 시간 설정
       - [참조 : Creating an app using Drag and Drop with React without libraries 👆!](https://dev.to/franklin030601/creating-an-app-using-drag-and-drop-with-react-without-libraries--5cg9)
@@ -25,6 +25,7 @@
       - 웹소켓과 차트라이브러리로 구현예정
 ## 백엔드 추가할 내용
   - 요구사항 정리 및 ERD 설계
+    - 👉 시작, 잠시멈춤, 재개, 리셋 버튼 사용 시, 백엔드에 시간별로 히스토리를 남기는 것부터 시작
   - Rest API 설계 및 구현
     - API 명세서로 정리
   - 인증 기능 구현
