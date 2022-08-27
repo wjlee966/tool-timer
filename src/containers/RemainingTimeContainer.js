@@ -12,14 +12,14 @@ class RemainingTimeContainer extends Component {
   }
 
   render() {
-    const { fins, setFins, minute, second, finStore } = this.props;
+    const { fins, setFins, finStore } = this.props;
 
     return (
       <RemainingTimeView
         fins={fins}
         setFins={setFins}
-        minute={minute}
-        second={second}
+        minute={finStore.minute}
+        second={finStore.second}
         isActive={finStore.isActive}
         setIsActive={this.onSetIsActive}
         isFast={finStore.isFast}

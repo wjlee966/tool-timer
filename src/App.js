@@ -11,16 +11,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      endTime: 25,
       fins: [],
     };
   }
-
-  setEndTime = minute => {
-    this.setState(state => ({
-      endTime: minute,
-    }));
-  };
 
   setFins = fins => {
     this.setState(state => ({
@@ -29,9 +22,6 @@ class App extends Component {
   };
 
   render() {
-    const minute = Array.from({ length: this.state.endTime }, (_, i) => i);
-    const second = Array.from({ length: 60 }, (_, i) => i);
-
     return (
       <div className='container'>
         <div className='timer-container'>
@@ -43,12 +33,8 @@ class App extends Component {
               <NumberIndexContainer />
             </div>
             <div className='scale-area'>
-              <RemainingTimeContainer
-                fins={this.state.fins}
-                setFins={this.setFins}
-                minute={minute}
-                second={second}
-              />
+              {/* <RemainingTimeContainer fins={this.state.fins} setFins={this.setFins} /> */}
+              <RemainingTimeContainer fins={this.state.fins} setFins={this.setFins} />
             </div>
           </div>
         </div>

@@ -9,6 +9,12 @@ class FinStore {
   _endTime = 25;
 
   @observable
+  _minute = Array.from({ length: this._endTime }, (_, i) => i);
+
+  @observable
+  _second = Array.from({ length: 60 }, (_, i) => i);
+
+  @observable
   _fins = [];
 
   @observable
@@ -22,6 +28,15 @@ class FinStore {
 
   get endTime() {
     return this._endTime;
+  }
+
+  @computed
+  get minute() {
+    return toJS(this._minute);
+  }
+
+  get second() {
+    return toJS(this._second);
   }
 
   @computed
@@ -39,6 +54,16 @@ class FinStore {
 
   get reset() {
     return this._reset;
+  }
+
+  @action
+  setEndTime(endTime) {
+    this._endTime = endTime;
+  }
+
+  @action
+  setFins(fins) {
+    this._fins = fins;
   }
 
   @action
