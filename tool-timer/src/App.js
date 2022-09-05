@@ -1,3 +1,5 @@
+import autobind from 'autobind-decorator';
+import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
 import './App.css';
 import ButtonContainer from './containers/ButtonContainer';
@@ -5,7 +7,11 @@ import ClockScaleContainer from './containers/ClockScaleContainer';
 import NumberIndexContainer from './containers/NumberIndexContainer';
 import RemainingTimeContainer from './containers/RemainingTimeContainer';
 import alarm from './effects';
+import { call } from './service/ApiService';
 
+@inject('trackStore')
+@autobind
+@observer
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +19,16 @@ class App extends Component {
     this.state = {
       fins: [],
     };
+  }
+
+  onSetIsTracks(tracks) {
+    this.props.trackStore.setTracks(tracks);
+  }
+
+  componentDidMount() {
+    call('/track', 'GET', null).then(response => {
+      this.onSetIsTracks(response.data);
+    });
   }
 
   setFins = fins => {

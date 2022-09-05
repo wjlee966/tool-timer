@@ -3,6 +3,7 @@ package com.example.be.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,36 @@ public class TrackService {
 			log.warn("Unknown user.");
 			throw new RuntimeException("Unknown user.");
 		}
+	}
+	
+	public List<TrackEntity> retrieve(final String userId) {
+		return repository.findByUserId(userId);
+	}
+	
+	public List<TrackEntity> update(final TrackEntity entity) {
+		validate(entity);
+		
+		final Optional<TrackEntity> original = repository.findById(entity.getId());
+		original.ifPresent(track -> {
+			track.setTime(entity.getTime());
+			track.setMode(entity.getMode());
+			repository.save(track);
+		});
+		
+		return retrieve(entity.getUserId());
+	}
+	
+	public List<TrackEntity> delete(final TrackEntity entity) {
+		validate(entity);
+		
+		try {
+			repository.delete(entity);
+		} catch(Exception e) {
+			log.error("error deleting entity", entity.getId(), e);
+			
+			throw new RuntimeException("error deleting entity" + entity.getId());
+		}
+		
+		return retrieve(entity.getUserId());
 	}
 }
