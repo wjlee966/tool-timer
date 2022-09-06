@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import LabView from '../views/LabView';
 
 class LabContainer extends Component {
   render() {
-    return <div>LabContainer</div>;
+    return <LabView />;
   }
 }
 

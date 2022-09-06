@@ -7,7 +7,7 @@ const ButtonView = observer(({ isActive, setIsActive, setIsFast, setReset }) => 
     <>
       {isActive ? (
         <button
-          className='start'
+          className='btn'
           onClick={() => {
             setIsActive(false);
             setIsFast(false);
@@ -17,7 +17,7 @@ const ButtonView = observer(({ isActive, setIsActive, setIsFast, setReset }) => 
         </button>
       ) : (
         <button
-          className='start'
+          className='btn'
           onClick={() => {
             setIsActive(true);
             setIsFast(false);
@@ -28,7 +28,7 @@ const ButtonView = observer(({ isActive, setIsActive, setIsFast, setReset }) => 
       )}
       <button
         disabled={isActive}
-        className='start'
+        className='btn'
         onClick={() => {
           setIsActive(true);
           setIsFast(true);
@@ -36,7 +36,7 @@ const ButtonView = observer(({ isActive, setIsActive, setIsFast, setReset }) => 
       >
         <i className='fa fa-fighter-jet' />
       </button>
-      <button className='start' onClick={() => setReset(prev => !prev)}>
+      <button className='btn' onClick={() => setReset(prev => !prev)}>
         <i className='fa fa-repeat' />
       </button>
     </>
